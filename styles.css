@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    border: 1px solid black;
+    width: 1600px;
+    height: 1600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+}
+
+#square {
+    /* border: 1px solid black; */
+    width: 100px;
+    height: 100px;
+}
+#square:hover {
+    background-color: yellow;
+}
