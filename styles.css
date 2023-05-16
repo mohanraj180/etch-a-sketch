@@ -27,6 +27,6 @@ button {
     max-height: 100%;
     flex: 1;
 } */
-#square:hover {
+.square:hover {
     background-color: blue;
 }
