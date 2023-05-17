@@ -14,6 +14,11 @@ body.insertBefore(btn, container);
 btn.setAttribute("id", "button");
 btn.textContent = "PAD SIZE";
 
+// add button to erase color
+const eraserBtn = document.createElement("button");
+body.appendChild(eraserBtn);
+eraserBtn.setAttribute("id", "eraser");
+eraserBtn.textContent = "ERASER";
 
 // add 16x16 square divs to container div
 let size =16; //default pad size
@@ -30,16 +35,36 @@ function createSquare() {
 for(let x = 1; x <= size * size; x++ ){
     createSquare();
 }
+
+// generate random rgb color
+function randomRGB(){
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+
+    let rgbColor = `rgb(${r}, ${g}, ${b})`;
+    return rgbColor;
+}
  
 // change sqaure color when clicked
 function changeColor() {
 const squares = document.querySelectorAll(".square");
 squares.forEach(square => square.addEventListener("click", (e) => {
     console.log(e);
-    e.target.style.backgroundColor = "black";   
+    e.target.style.backgroundColor = randomRGB();   
 }));
 }
 changeColor();
+
+// erase color using eraser button
+function eraser(){
+    const squares = document.querySelectorAll(".square");
+squares.forEach(square => square.addEventListener("click", (e) => {
+    console.log(e);
+    e.target.style.backgroundColor = "white";   
+}));
+}
+eraserBtn.addEventListener("click", eraser());
 
 // prompt to get user input for pad size when clicking the button and completely recreate new pad
 btn.addEventListener("click", function(){
