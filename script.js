@@ -1,16 +1,3 @@
-const body = document.querySelector("body");
-
-// add button for user to resize sketch pad
-const btn = document.createElement("button");
-body.appendChild(btn);
-btn.setAttribute("id", "button");
-btn.textContent = "PAD SIZE";
-
-// add button to erase color
-const eraserBtn = document.createElement("button");
-body.appendChild(eraserBtn);
-eraserBtn.setAttribute("id", "eraser");
-eraserBtn.textContent = "ERASER";
 
 // create a container to hold grid squares
 function createContainer(){
@@ -42,7 +29,6 @@ function randomRGB(){
 function eraser(){
     const squares = document.querySelectorAll(".square");
 squares.forEach(square => square.addEventListener("click", (e) => {
-    console.log(e);
     e.target.style.backgroundColor = "white";   
 }));
 }
@@ -53,7 +39,7 @@ function changeColor(e) {
 }
 
 // prompt to get user input for pad size when clicking the button and completely recreate new pad
-function getPadSize(){
+function getPadSize(e){
     let newSize = prompt("how many square you want per side (max 100)");
     if(parseInt(newSize) > 100){
         size = 16;
@@ -67,8 +53,38 @@ function getPadSize(){
             createSquare();
         }
     }
-    listenToSqaure();
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => square.addEventListener("click",(e) => changeColor(e)));    
 }
+
+// toggle to color mode if color button is clicked
+function getColorMode(){
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => square.addEventListener("click",(e) => changeColor(e)));
+}
+
+
+
+    
+const body = document.querySelector("body");
+
+// add button for user to resize sketch pad
+const btn = document.createElement("button");
+body.appendChild(btn);
+btn.setAttribute("id", "button");
+btn.textContent = "PAD SIZE";
+    
+// add button to erase color
+const eraserBtn = document.createElement("button");
+body.appendChild(eraserBtn);
+eraserBtn.setAttribute("id", "eraser");
+eraserBtn.textContent = "ERASER";
+    
+// add button to toggle to color mode
+const colorMode = document.createElement("button");
+body.appendChild(colorMode);
+colorMode.setAttribute("id", "color-mode");
+colorMode.textContent = "COLOR";
 
 createContainer();
 
@@ -80,20 +96,19 @@ for(let x = 1; x <= size * size; x++ ){
     createSquare();
 }
 
-listenToSqaure();
+// listent to each button and execute appropriate changes
 
-// listen to change square color when clicked
-function listenToSqaure(){
 const squares = document.querySelectorAll(".square");
 squares.forEach(square => square.addEventListener("click",(e) => changeColor(e)));
-}
 
-btn.addEventListener("click", getPadSize);
+const padSizeClicked = document.getElementById("button");
+padSizeClicked.addEventListener("click", getPadSize);
 
-// eraserBtn.addEventListener("click", eraser());
-
+const eraserClicked = document.getElementById("eraser");
+eraserClicked.addEventListener("click", eraser);
  
-
+const colorModeClicked = document.getElementById("color-mode");
+colorModeClicked.addEventListener("click", getColorMode);
 
 
 
